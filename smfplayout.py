@@ -184,7 +184,7 @@ class smfplayout:
         self.mtc.reset()
 
     def barbeatFromTicks(self, tick):
-        beat = tick / self.midi_data.ticks_per_beat * self.denominator / 4
+        beat = tick * self.denominator / self.midi_data.ticks_per_beat / 4
         self.bar = int(beat / self.numerator)
         self.beat = int(beat % self.numerator)
 
