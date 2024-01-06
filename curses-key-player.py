@@ -59,7 +59,7 @@ class App:
         self.wdir = self.cols - self.infow
 
         self.transpose = 0
-        self.baseNote = 60
+        self.baseNote = 48
         self.velocity = 120
         self.resetScreen()
         self.activeNotes = {}
@@ -72,7 +72,7 @@ class App:
             self.midi_out.send_message([0x80, self.baseNote + h, 64])
             self.screen.addstr(2, h, f'-')
         else:
-            self.notesOffCounter = 1000
+            self.notesOffCounter = 100000
             self.midi_out.send_message([0x90, self.baseNote + h, self.velocity])
             self.activeNotes[h] = self.velocity
             self.screen.addstr(2, h, f'O')
@@ -126,7 +126,7 @@ class App:
             pass
         elif key in ['-']:
             pass
-        elif key in [27]:
+        elif key in ['\x1b']:
             return False
         elif key in "asdfghjkl;'wetyuop":
             self.sendNote(key)
@@ -147,6 +147,7 @@ class App:
         except:
             print("couldn't go to last directory")
             self.settings.setCurrentWorkingDirectory(os.getcwd())
+
     def run(self) -> bool:
 
         self.midi_out = rtmidi.MidiOut()
@@ -165,7 +166,7 @@ class App:
                         return True
                     elif not self.interpretKey(key):
                         self.cleanExit()
-                        print("Soon in shell again...")
+                        print("bBck to shell...")
                         return False
 
             except Exception as e:
