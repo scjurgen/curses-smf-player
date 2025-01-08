@@ -1,5 +1,4 @@
 mido==1.2.10
-pip==21.3.1
-python-rtmidi==1.4.9
-setuptools==60.2.0
-wheel==0.37.1
+python-rtmidi==1.5.8
+setuptools>=65.5.0
+
